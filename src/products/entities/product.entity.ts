@@ -1,5 +1,6 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
+@Entity()
 export class Product {
     @PrimaryGeneratedColumn()
     product_id: number;
@@ -37,14 +38,20 @@ export class Product {
     @Column({ type:'int' })
     quantity: number;
 
-    @Column({ type:'float' })
+    @Column({ type:'double' })
     price: number;
+
+    @Column({ type:'double' })
+    cost_price: number;
 
     @Column({ type:'int' })
     sale: number;
 
     @Column({ type:'int' })
     iva: number;
+
+    @Column({ type:'varchar', length: 130 })
+    image: string;
 
     @Column({ type:'datetime' })
     creation_date: string;

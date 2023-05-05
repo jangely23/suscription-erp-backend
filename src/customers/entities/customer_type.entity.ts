@@ -1,6 +1,7 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-export class customer {
+@Entity()
+export class Customer_type {
     @PrimaryGeneratedColumn()
     customer_type_id: number;
 

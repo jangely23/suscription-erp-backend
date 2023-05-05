@@ -1,5 +1,6 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
+@Entity()
 export class Customer_order_detail {
     @PrimaryGeneratedColumn()
     customer_order_detail_id: number;
@@ -9,6 +10,15 @@ export class Customer_order_detail {
     
     @Column({ type:'int' })
     product_id: number;
+
+    @Column({ type:'text' })
+    observation: string;
+
+    @Column({ type:'int' })
+    quantity: number;
+
+    @Column({ type:'double' })
+    value: number;
 
     @Column({ type:'datetime' })
     creation_date: string;
