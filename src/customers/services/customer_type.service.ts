@@ -9,14 +9,19 @@ export class CustomerTypeService {
     constructor(@InjectRepository(Customer_type) private customerTypeRepo: Repository<Customer_type>){}
 
     findAll(){
-        return this.customerTypeRepo.find();
+        const customsType = this.customerTypeRepo.find();
+        if(!customsType){
+            throw new NotFoundException(`Custom type not found`);
+        }
+
+        return customsType;
     }
 
-    findOne(customer_type_id: number){
+/*     findOne(customer_type_id: number){
         const customerType = this.customerTypeRepo.findOne(customer_type_id);
         if (!customerType){
             throw new NotFoundException('Product not found');
         }
         return customerType;
-    }
+    } */
 }

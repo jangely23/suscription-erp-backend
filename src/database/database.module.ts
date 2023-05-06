@@ -13,13 +13,13 @@ import configuration from '../configuration';
                 const {name, port, host, user, password} = configService.database;
                 return {
                     type: 'mysql',
-                    host: host,
-                    port: port,
+                    host,
+                    port,
                     username: user,
-                    password: password,
+                    password,
                     database: name,
-                    entities: [],
                     synchronize: false,
+                    autoLoadEntities:true,
                 }
             }
         })

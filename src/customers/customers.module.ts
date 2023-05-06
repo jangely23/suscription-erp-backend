@@ -13,4 +13,4 @@ import { Customer_type } from './entities/customer_type.entity';
   controllers: [CustomerTypeController, CustomersController],
   providers: [CustomersService, CustomerTypeService]
 })
-export class UsersModule {}
+export class CustomerModule {}

@@ -7,11 +7,10 @@ import { AppService } from './app.service';
 import { enviroments } from './enviroments';
 import { DatabaseModule } from './database/database.module';
 import { ProductsModule } from './products/products.module';
-import { UsersModule } from './customers/customers.module';
+import { CustomerModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
 import { InventoryModule } from './inventorys/inventorys.module';
 import { SuscriptionsModule } from './suscriptions/suscriptions.module';
-import { ProductssService } from './productss/services/productss.service';
 import configuration from './configuration';
 
 
@@ -33,12 +32,12 @@ import configuration from './configuration';
     }),
     DatabaseModule,
     ProductsModule,
-    UsersModule,
+    CustomerModule,
     OrdersModule,
     InventoryModule,
     SuscriptionsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ProductssService],
+  providers: [AppService],
 })
 export class AppModule {}
