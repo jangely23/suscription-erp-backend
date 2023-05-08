@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
-@Entity()
+@Entity('Customer')
 export class Customer {
     @PrimaryGeneratedColumn()
     customer_id: number;

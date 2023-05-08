@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-@Entity()
+@Entity('Product')
 export class Product {
     @PrimaryGeneratedColumn()
     product_id: number;
@@ -41,15 +41,15 @@ export class Product {
     @Column({ type:'double' })
     price: number;
 
-    @Column({ type:'double' })
-    cost_price: number;
-
     @Column({ type:'int' })
     sale: number;
 
     @Column({ type:'int' })
     iva: number;
 
+    @Column({ type:'double' })
+    cost_price: number;
+    
     @Column({ type:'varchar', length: 130 })
     image: string;
 
