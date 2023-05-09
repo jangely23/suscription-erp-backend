@@ -32,8 +32,8 @@ export class Product {
     @Column({ type:'varchar', length: 30 })
     lote: string;
 
-    @Column({ type:'int' })
-    state: number;
+    @Column({ type:'enum', enum:['inactive','active','sold_out','eliminate'] })
+    state: string;
 
     @Column({ type:'int' })
     quantity: number;

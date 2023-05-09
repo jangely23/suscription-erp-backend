@@ -25,8 +25,8 @@ export class Customer {
     @Column({ type:'varchar', length: 100 })
     country: string;
 
-    @Column({ type:'int' })
-    state: number;
+    @Column({type:'enum', enum:['inactive','active','demo','suspended','eliminate'], default:'active'})
+    state:  string;
 
     @Column({ type:'datetime' })
     creation_date: string;

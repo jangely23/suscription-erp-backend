@@ -1,8 +1,8 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from '../entities/customer.entity';
 import { Repository } from 'typeorm';
-import { promises } from 'dns';
+import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 
 @Injectable()
 export class CustomersService {
@@ -25,8 +25,8 @@ export class CustomersService {
         return customer;
     }
 
-    findOne(company_id:number, customer_id: number): Promise<Customer | undefined>{
-        const customer = this.customer.findOne({
+    async findOne(company_id:number, customer_id: number): Promise<Customer | undefined>{
+        const customer = await this.customer.findOne({
             where:{
                 parent_id: company_id,
                 customer_id: customer_id
@@ -34,9 +34,41 @@ export class CustomersService {
         });
 
         if(!customer){
-            throw new InternalServerErrorException('Custom type error');
+            throw new NotFoundException('Custom not found');
         }
 
         return customer;
+    }
+
+    create(data: CreateCustomerDto){
+        const newCustomer = this.customer.create(data)
+
+        return this.customer.save(newCustomer);
+    }
+
+    async update(customer_id: number, change: UpdateCustomerDto) {
+        const currenCustomer = await this.customer.findOne({
+            where: { customer_id }
+        })
+
+        if(!currenCustomer){
+            throw new NotFoundException('Custom not found');
+        }
+
+        this.customer.merge(currenCustomer, change);
+
+        return this.customer.save(currenCustomer);
+    }
+
+    async delete(customer_id: number){
+        const currenCustomer = await this.customer.findOne({
+            where: { customer_id }
+        })
+
+        if(!currenCustomer){
+            throw new NotFoundException('Custom not found');
+        }
+
+        return this.customer.delete(customer_id);
     }
 }
