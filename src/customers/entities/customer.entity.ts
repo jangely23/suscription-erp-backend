@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 @Entity('Customer')
 export class Customer {
     @PrimaryGeneratedColumn()
@@ -28,9 +28,15 @@ export class Customer {
     @Column({type:'enum', enum:['inactive','active','demo','suspended','eliminate'], default:'active'})
     state:  string;
 
-    @Column({ type:'datetime' })
-    creation_date: string;
+    @CreateDateColumn({
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP',
+    })
+    creation_date: Date;
 
-    @Column({ type:'datetime' })
-    update_date: string;
+    @UpdateDateColumn({
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP',
+    })
+    update_date: Date;
 }
