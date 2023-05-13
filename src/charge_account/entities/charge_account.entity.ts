@@ -1,9 +1,9 @@
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('Customer_order')
-export class Customer_order {
+@Entity('Charge_account')
+export class Charge_account {
     @PrimaryGeneratedColumn()
-    customer_order_id: number;
+    charge_account_id: number;
 
     @Column({ type:'int' })
     customer_id: number;
@@ -11,7 +11,10 @@ export class Customer_order {
     @Column({ type:'int' })
     company_id: number;
 
-    @Column({ type:'enum', enum:[ 'pending','process','success','cancelled' ] })
+    @Column({ type:'int' })
+    charge_account_type_id: number;
+
+    @Column({ type:'enum', enum:[ 'pending','payment','suspended','eliminate' ] })
     state: string;
 
     @Column({ type:'double' })

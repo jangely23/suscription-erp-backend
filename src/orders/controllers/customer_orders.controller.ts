@@ -39,18 +39,18 @@ export class CustomerOrdersController {
         return this.customerOrder.create(payload);
     }
 
-    @Put(':customerId')
+    @Put(':customerOrderId')
     @HttpCode(HttpStatus.OK)
     update(
-        @Param('customerId', ParseIntPipe) customer_id: number,
+        @Param('customerOrderId', ParseIntPipe) customer_order_id: number,
         @Body() payload: UpdateCustomerOrderDto
     ){
-        return this.customerOrder.update(customer_id, payload);
+        return this.customerOrder.update(customer_order_id, payload);
     }
 
-    @Delete(':customerId')
+    @Delete(':customerOrderId')
     @HttpCode(HttpStatus.OK)
-    delete(@Param('customerId', ParseIntPipe) customer_id: number){
-        return this.customerOrder.delete(customer_id);
+    delete(@Param('customerOrderId', ParseIntPipe) customer_order_id: number){
+        return this.customerOrder.delete(customer_order_id);
     }   
 }

@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger"
-import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 
 
 export class CreateProductDto{       
@@ -20,26 +20,32 @@ export class CreateProductDto{
     readonly name: string;                                                          
     
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly reference: string;           
     
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly stocktacking_sku: string;    
     
     @IsNumber()
+    @IsOptional()
     @ApiProperty()
     readonly size: number;                
     
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly unit_of_measurement: string; 
     
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly description: string;         
     
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly lote: string;                
     
@@ -69,6 +75,7 @@ export class CreateProductDto{
     readonly iva: number;  
     
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly image: string; 
     

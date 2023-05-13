@@ -1,21 +1,25 @@
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Product } from './product.entity';
 
 @Entity('Product_type')
 export class Product_type {
     @PrimaryGeneratedColumn()
     product_type_id: number;
 
+    @OneToMany(() => Product, (product)=> product.product_type)
+    products: Product[];
+
     @Column({ type:'varchar', length: 80 })
     product_type: string;
 
     @CreateDateColumn({
-        type: 'timestamptz',
+        type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     creation_date: Date;
 
     @UpdateDateColumn({
-        type: 'timestamptz',
+        type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     update_date: Date;

@@ -10,7 +10,8 @@ import { ProductsModule } from './products/products.module';
 import { CustomerModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
 import { InventoryModule } from './inventorys/inventorys.module';
-import { SuscriptionsModule } from './suscriptions/suscriptions.module';
+import { ChargeAccountController } from './charge_account/controllers/charge_account.controller';
+import { ChargeAccountModule } from './charge_account/charge_account.module';
 import configuration from './configuration';
 
 
@@ -35,9 +36,9 @@ import configuration from './configuration';
     CustomerModule,
     OrdersModule,
     InventoryModule,
-    SuscriptionsModule,
+    ChargeAccountModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, ChargeAccountController],
   providers: [AppService],
 })
 export class AppModule {}

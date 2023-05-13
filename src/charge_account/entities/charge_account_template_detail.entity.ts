@@ -1,15 +1,18 @@
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('Customer_order_detail')
-export class Customer_order_detail {
+@Entity('Charge_account_template_detail')
+export class Charge_account_template_detail {
     @PrimaryGeneratedColumn()
-    customer_order_detail_id: number;
+    charge_account_template_detail_id: number;
 
     @Column({ type:'int' })
-    customer_order_id: number;
+    charge_account_template_id: number;
     
     @Column({ type:'int' })
     product_id: number;
+
+    @Column({ type:'text'})
+    observation: string;
 
     @Column({ type:'int' })
     quantity: number;

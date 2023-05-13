@@ -1,15 +1,18 @@
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, ManyToOne ,} from 'typeorm';
+import { Product_type } from './product_type.entity';
+import { Customer } from 'src/customers/entities/customer.entity';
+
 
 @Entity('Product')
 export class Product {
     @PrimaryGeneratedColumn()
     product_id: number;
 
-    @Column({ type:'int' })
-    product_type_id: number;
+    @ManyToOne(() => Product_type, (product_type)=> product_type.products)
+    product_type: Product_type;
     
-    @Column({ type:'int' })
-    company_id: number;
+    @ManyToOne(() => Customer, (customer)=> customer.products)
+    company: Customer;
 
     @Column({ type:'varchar', length: 100 })
     name: string;
@@ -54,13 +57,13 @@ export class Product {
     image: string;
 
     @CreateDateColumn({
-        type: 'timestamptz',
+        type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     creation_date: Date;
 
     @UpdateDateColumn({
-        type: 'timestamptz',
+        type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     update_date: Date;
