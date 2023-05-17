@@ -10,8 +10,9 @@ import { ProductsModule } from './products/products.module';
 import { CustomerModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
 import { InventoryModule } from './inventorys/inventorys.module';
-import { ChargeAccountController } from './charge_account/controllers/charge_account.controller';
-import { ChargeAccountModule } from './charge_account/charge_account.module';
+import { ChargeAccountController } from './charge_accounts/controllers/charge_account.controller';
+import { ChargeAccountModule } from './charge_accounts/charge_account.module';
+import { UsersModule } from './users/users.module';
 import configuration from './configuration';
 
 
@@ -37,6 +38,7 @@ import configuration from './configuration';
     OrdersModule,
     InventoryModule,
     ChargeAccountModule,
+    UsersModule,
   ],
   controllers: [AppController, ChargeAccountController],
   providers: [AppService],

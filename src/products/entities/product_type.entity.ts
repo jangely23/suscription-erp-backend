@@ -6,9 +6,6 @@ export class Product_type {
     @PrimaryGeneratedColumn()
     product_type_id: number;
 
-    @OneToMany(() => Product, (product)=> product.product_type)
-    products: Product[];
-
     @Column({ type:'varchar', length: 80 })
     product_type: string;
 
@@ -24,4 +21,8 @@ export class Product_type {
     })
     update_date: Date;
 
+    // Own foreign keys
+    
+    @OneToMany(() => Product, (product)=> product.product_type)
+    products: Product[];
 }

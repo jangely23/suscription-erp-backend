@@ -1,12 +1,11 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Charge_account_template } from "./charge_account_template.entity";
+import { Product } from "src/products/entities/product.entity";
 
 @Entity('Charge_account_template_detail')
 export class Charge_account_template_detail {
     @PrimaryGeneratedColumn()
     charge_account_template_detail_id: number;
-
-    @Column({ type:'int' })
-    charge_account_template_id: number;
     
     @Column({ type:'int' })
     product_id: number;
@@ -31,4 +30,12 @@ export class Charge_account_template_detail {
         default: () => 'CURRENT_TIMESTAMP',
     })
     update_date: Date;
+
+    // Own foreign keys
+
+    @ManyToOne(() => Charge_account_template, (charge_account_template) => charge_account_template.charge_account_template_details)
+    charge_account_template: Charge_account_template;
+        
+    @ManyToOne(() => Product, (product) => product.charge_account_template_details)
+    product = Product;
 }

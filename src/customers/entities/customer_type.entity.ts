@@ -6,10 +6,8 @@ export class Customer_type {
     @PrimaryGeneratedColumn()
     customer_type_id: number;
 
-    @OneToMany(() => Customer, (customer)=> customer.customer_type)
-    customers: Customer[];
-
-    @Column({ type:'varchar', length: 80 })
+   
+    @Column({type:'enum', enum:['reseller','company','client'], default:'active'})
     customer_type: string;
 
     @CreateDateColumn({
@@ -23,4 +21,8 @@ export class Customer_type {
         default: () => 'CURRENT_TIMESTAMP',
     })
     update_date: Date;
+
+    // Own foreign keys
+    @OneToMany(() => Customer, (customer)=> customer.customer_type)
+    customers: Customer[];
 }

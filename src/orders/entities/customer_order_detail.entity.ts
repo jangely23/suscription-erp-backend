@@ -1,15 +1,11 @@
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Customer_order } from './customer_order.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Entity('Customer_order_detail')
 export class Customer_order_detail {
     @PrimaryGeneratedColumn()
     customer_order_detail_id: number;
-
-    @Column({ type:'int' })
-    customer_order_id: number;
-    
-    @Column({ type:'int' })
-    product_id: number;
 
     @Column({ type:'int' })
     quantity: number;
@@ -28,4 +24,12 @@ export class Customer_order_detail {
         default: () => 'CURRENT_TIMESTAMP',
     })
     update_date: Date;
+
+    // Own foreign keys
+    
+    @ManyToOne(() => Customer_order, (customer_order)=> customer_order.customer_order_details)
+    customer_order = Customer_order;
+
+    @ManyToOne(() => Product, (product) => product.customer_order_details)
+    product = Product;
 }
