@@ -18,6 +18,9 @@ export class User {
     @Column({ type:'varchar', length: 16 })
     password: string;
 
+    @Column({type:'enum', enum:['active','inactive','eliminate'], default:'active'})
+    state:  string;
+
     @Column({type:'enum', enum:['superadmin','administrator','operator','read'], default:'administrator'})
     role:  string;
 

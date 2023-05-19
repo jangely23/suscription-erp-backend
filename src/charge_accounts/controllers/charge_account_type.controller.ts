@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
-import { ChargeAccountTypesService } from '../service/charge_account_types.service';
-import { CreateChargeAccountTypeDto, UpdateChargeAccountTypeDto } from '../dtos/charge_account_type.dto';
+/* import { ChargeAccountTypesService } from '../service/charge_account_types.service';
+import { CreateChargeAccountTypeDto, UpdateChargeAccountTypeDto } from '../dtos/charge_account_type.dto'; */
 
 @Controller('charge-account-type')
 export class ChargeAccountTypeController {
-    constructor(private chargeAccountType: ChargeAccountTypesService) {}
+    /*  constructor(private chargeAccountType: ChargeAccountTypesService) {}
 
-    @Get()
+   @Get()
     @HttpCode(HttpStatus.ACCEPTED)
     getAllCustomersType(
         @Query('limit') limit = 100,
@@ -40,5 +40,5 @@ export class ChargeAccountTypeController {
     @HttpCode(HttpStatus.OK)
     delete(@Param('chargeAccountTypeId', ParseIntPipe) customer_type_id: number){
         return this.chargeAccountType.delete(customer_type_id);
-    }
+    } */
 }

@@ -6,7 +6,7 @@ import { CreateCustomerOrderDetailDto, UpdateCustomerOrderDetailDto } from '../d
 @ApiTags('Customer order details')
 @Controller('customer-order-details')
 export class CustomerOrderDetailsController {
-    constructor(private customerOrderDetail: CustomerOrderDetailsService){}
+    /* constructor(private customerOrderDetail: CustomerOrderDetailsService){}
 
     @Get(':customerOrderId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -47,5 +47,5 @@ export class CustomerOrderDetailsController {
         @Param('customerOrderDetailId', ParseIntPipe) customer_order_detail_id: number
     ){
         return this.customerOrderDetail.delete(customer_order_detail_id);
-    }
+    } */
 }

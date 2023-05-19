@@ -6,7 +6,7 @@ import { CreateProductTypeDto, UpdateProductTypeDto } from '../dtos/product_type
 
 @Injectable()
 export class ProductTypeService {
-    constructor(
+    /* constructor(
         @InjectRepository(Product_type)
         private product_type: Repository<Product_type>,
     ){}
@@ -64,7 +64,7 @@ export class ProductTypeService {
         }
 
         return this.product_type.delete(product_type_id)
-    }
+    } */
 
 }
 

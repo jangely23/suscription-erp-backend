@@ -1,7 +1,6 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-
 export class CreateChargeAccountDto {
     @IsNumber()
     @IsNotEmpty()

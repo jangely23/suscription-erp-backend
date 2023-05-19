@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import { ChargeAccountsTemplateService } from '../service/charge_accounts_template.service';
-import { CreateChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto';
+/* import { ChargeAccountsTemplateService } from '../service/charge_accounts_template.service';
+import { CreateChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto'; */
 
 @Controller('charge-accounts-template')
 export class ChargeAccountsTemplateController {
-    constructor(private chargeAccountTemplate: ChargeAccountsTemplateService ){}
+    /* constructor(private chargeAccountTemplate: ChargeAccountsTemplateService ){}
    
     @Get('charge-account-template/:chargeAccountTemplateId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -50,5 +50,5 @@ export class ChargeAccountsTemplateController {
     @HttpCode(HttpStatus.OK)
     delete(@Param('chargeAccountTemplateId', ParseIntPipe) charge_account_template_id: number){
         return this.chargeAccountTemplate.delete(charge_account_template_id);
-    }  
+    } */  
 }

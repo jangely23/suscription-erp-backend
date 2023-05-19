@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ChargeAccountDetailsService {
-    constructor(
+    /* constructor(
         @InjectRepository(Charge_account_detail) 
         private charge_account_detail: Repository<Charge_account_detail>,
     ){}
@@ -76,5 +76,5 @@ export class ChargeAccountDetailsService {
         }
         
         return this.charge_account_detail.delete(chargeAccountDetail);
-    }
+    } */
 }

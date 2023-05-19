@@ -6,7 +6,7 @@ import { CreateCustomerOrderDto, UpdateCustomerOrderDto } from '../dtos/customer
 @ApiTags('Customer orders')
 @Controller('customer-orders')
 export class CustomerOrdersController {
-    constructor(private customerOrder: CustomerOrdersService ){}
+    /* constructor(private customerOrder: CustomerOrdersService ){}
    
     @Get('order/:customerOrderId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -52,5 +52,5 @@ export class CustomerOrdersController {
     @HttpCode(HttpStatus.OK)
     delete(@Param('customerOrderId', ParseIntPipe) customer_order_id: number){
         return this.customerOrder.delete(customer_order_id);
-    }   
+    } */   
 }

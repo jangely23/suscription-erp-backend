@@ -82,7 +82,8 @@ export class CreateProductDto{
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly cost_price: number;          
+    readonly cost_price: number;  
+            
 
 }
 

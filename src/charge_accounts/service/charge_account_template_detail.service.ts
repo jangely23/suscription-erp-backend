@@ -11,7 +11,7 @@ export class ChargeAccountTemplateDetailsService {
         private charge_account_template_detail: Repository<Charge_account_template_detail>,
     ){}
 
-    findAll(charge_account_template_detail_id: number): Promise<Charge_account_template_detail[]>{
+    /* findAll(charge_account_template_detail_id: number): Promise<Charge_account_template_detail[]>{
         const allChargeAccountTemplateDetail = this.charge_account_template_detail.find({
             where: {
                 charge_account_template_detail_id
@@ -76,5 +76,5 @@ export class ChargeAccountTemplateDetailsService {
         }
         
         return this.charge_account_template_detail.delete(chargeAccountTemplateDetail);
-    }
+    } */
 }

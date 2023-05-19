@@ -6,7 +6,7 @@ import { CreateCustomerOrderDetailDto, UpdateCustomerOrderDetailDto } from '../d
 
 @Injectable()
 export class CustomerOrderDetailsService {
-    constructor(
+    /* constructor(
         @InjectRepository(Customer_order_detail) 
         private customer_order_detail: Repository<Customer_order_detail>,
     ){}
@@ -76,5 +76,5 @@ export class CustomerOrderDetailsService {
         }
         
         return this.customer_order_detail.delete(orderDetail);
-    }
+    } */
 }

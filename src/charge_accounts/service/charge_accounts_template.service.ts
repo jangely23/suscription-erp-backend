@@ -11,7 +11,7 @@ export class ChargeAccountsTemplateService {
         private charge_account_template: Repository<Charge_account_template>,
     ){}
 
-    findAllByCompany(company_id: number): Promise<Charge_account_template[]>{
+    /* findAllByCompany(company_id: number): Promise<Charge_account_template[]>{
         const allChargeAccountTemplate = this.charge_account_template.find({
             where:{
                 company_id,
@@ -88,6 +88,6 @@ export class ChargeAccountsTemplateService {
         }
 
         return this.charge_account_template.delete(chargeAccountTemplate);
-    }
+    } */
 
 }

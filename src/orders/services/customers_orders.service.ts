@@ -6,7 +6,7 @@ import { CreateCustomerOrderDto, UpdateCustomerOrderDto } from '../dtos/customer
 
 @Injectable()
 export class CustomerOrdersService {
-    constructor(
+    /* constructor(
         @InjectRepository(Customer_order)
         private customer_order: Repository<Customer_order>,
     ){}
@@ -88,6 +88,6 @@ export class CustomerOrdersService {
         }
 
         return this.customer_order.delete(order);
-    }
+    } */
 
 }

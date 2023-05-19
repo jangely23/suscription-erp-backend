@@ -11,7 +11,7 @@ import { CreateCustomerTypeDto, UpdateCustomerTypeDto } from '../dtos/customer_t
 
 @Injectable()
 export class CustomerTypeService {
-  constructor(
+  /* constructor(
     @InjectRepository(Customer_type)
     private customerTypeRepo: Repository<Customer_type>,
   ) {}
@@ -66,5 +66,5 @@ export class CustomerTypeService {
     }
 
     return this.customerTypeRepo.delete(customer_type_id);
-  }
+  } */
 }

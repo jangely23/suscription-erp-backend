@@ -18,7 +18,7 @@ import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 @ApiTags('Customer')
 @Controller('customers')
 export class CustomersController {
-  constructor(private customer: CustomersService) {}
+  /* constructor(private customer: CustomersService) {}
 
   @Get(':companyId')
   @ApiOperation({ summary: 'Customer list of the company' })
@@ -59,5 +59,5 @@ export class CustomersController {
   @Delete(':customerId')
   delete( @Param('customerId', ParseIntPipe) customer_id: number){
     return this.customer.delete(customer_id);
-  }
+  } */
 }

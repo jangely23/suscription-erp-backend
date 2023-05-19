@@ -6,7 +6,7 @@ import { CreateProductDto, UpdateProductDto } from '../dtos/product.dto';
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
-    constructor(private products: ProductsService){}
+    /* constructor(private products: ProductsService){}
 
     @Get(':companyId/products')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -53,6 +53,6 @@ export class ProductsController {
         @Param('productId', ParseIntPipe) product_id: number
     ){
         return this.products.delete(product_id);
-    }
+    } */
 
 }

@@ -6,7 +6,7 @@ import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 
 @Injectable()
 export class CustomersService {
-    constructor(
+    /* constructor(
         @InjectRepository(Customer)
         private customer: Repository<Customer>,     
     ){}
@@ -70,5 +70,5 @@ export class CustomersService {
         }
 
         return this.customer.delete(customer_id);
-    }
+    } */
 }
