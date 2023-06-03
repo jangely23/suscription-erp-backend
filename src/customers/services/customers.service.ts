@@ -6,15 +6,20 @@ import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 
 @Injectable()
 export class CustomersService {
-    /* constructor(
+    constructor(
         @InjectRepository(Customer)
         private customer: Repository<Customer>,     
     ){}
 
-    findAll(company_id: number): Promise<Customer[]> {
+    findAll(company_id: number){
         const customer = this.customer.find({
+            relations:{
+                parent_customer:true,
+            },
             where: {
-                parent_id: company_id
+                parent_customer:{
+                    customer_id:company_id,
+                }
             } 
         });
 
@@ -25,11 +30,13 @@ export class CustomersService {
         return customer;
     }
 
-    async findOne(company_id:number, customer_id: number): Promise<Customer | undefined>{
+    async findOne(customer_id: number): Promise<Customer | undefined>{
         const customer = await this.customer.findOne({
+            relations:{
+                products:true
+            },
             where:{
-                parent_id: company_id,
-                customer_id: customer_id
+                customer_id
             }
         });
 
@@ -70,5 +77,5 @@ export class CustomersService {
         }
 
         return this.customer.delete(customer_id);
-    } */
+    }
 }

@@ -33,7 +33,7 @@ export class Product {
     @Column({ type:'varchar', length: 30 })
     lote: string;
 
-    @Column({ type:'enum', enum:['inactive','active','sold_out','eliminate'] })
+    @Column({ type:'enum', enum:['inactive','available','sold_out','eliminate'], default:'available' })
     state: string;
 
     @Column({ type:'int' })
@@ -42,10 +42,10 @@ export class Product {
     @Column({ type:'double' })
     price: number;
 
-    @Column({ type:'int' })
+    @Column({ type:'int', default:0 })
     sale: number;
 
-    @Column({ type:'int' })
+    @Column({ type:'int', default:0 })
     iva: number;
 
     @Column({ type:'double' })

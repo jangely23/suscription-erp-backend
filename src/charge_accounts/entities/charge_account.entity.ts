@@ -8,7 +8,7 @@ export class Charge_account {
     @PrimaryGeneratedColumn()
     charge_account_id: number;
 
-    @Column({ type:'enum', enum:[ 'pending','payment','suspended','eliminate' ] })
+    @Column({ type:'enum', enum:[ 'pending','payment','suspended','eliminate','none'] })
     state: string;
 
     @Column({ type:'double' })

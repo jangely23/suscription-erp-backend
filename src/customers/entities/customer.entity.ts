@@ -22,7 +22,7 @@ export class Customer {
     @Column({ type:'varchar', length: 20 })
     city: string;
 
-    @Column({ type:'varchar', length: 100 })
+    @Column({ type:'varchar', length: 50 })
     country: string;
 
     @Column({type:'enum', enum:['inactive','active','demo','suspended','eliminate'], default:'active'})

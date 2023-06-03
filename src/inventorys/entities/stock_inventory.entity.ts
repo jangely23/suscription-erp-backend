@@ -6,7 +6,7 @@ export class Stock_inventory {
     @PrimaryGeneratedColumn()
     stock_inventory_id: number;
 
-    @Column({ type:'enum', enum:['add','deduct'] })
+    @Column({ type:'enum', enum:['add','deduct','none'] })
     action: string;
 
     @Column({ type:'int' })

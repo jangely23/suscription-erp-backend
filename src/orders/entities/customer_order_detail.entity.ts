@@ -11,7 +11,7 @@ export class Customer_order_detail {
     quantity: number;
 
     @Column({ type:'double' })
-    value: number;
+    unit_value: number;
 
     @CreateDateColumn({
         type: 'timestamp',

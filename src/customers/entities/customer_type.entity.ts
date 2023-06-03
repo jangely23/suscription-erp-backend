@@ -7,7 +7,7 @@ export class Customer_type {
     customer_type_id: number;
 
    
-    @Column({type:'enum', enum:['reseller','company','client'], default:'active'})
+    @Column({type:'varchar', length:30})
     customer_type: string;
 
     @CreateDateColumn({

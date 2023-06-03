@@ -7,7 +7,7 @@ export class Charge_account_type {
     @PrimaryGeneratedColumn()
     charge_account_type_id: number;
 
-    @Column({ type:'enum', enum:['mensual', 'bimestral', 'trimestral', 'semestral', 'anual'] })
+    @Column({ type:'enum', enum:['monthly', 'bimonthly', 'quarterly', ' semi-annually', 'annually'] })
     frequency: number;
     
     @Column({ type:'int' })

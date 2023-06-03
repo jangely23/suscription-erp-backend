@@ -11,7 +11,7 @@ export class Charge_account_template {
     @Column({ type:'int' })
     charge_account_type_id: number;
 
-    @Column({ type:'enum', enum:[ 'inactive','active','eliminate' ] })
+    @Column({ type:'enum', enum:[ 'inactive','active','eliminate', 'none' ] })
     state: string;
 
     @Column({ type:'double' })

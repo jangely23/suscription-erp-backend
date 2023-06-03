@@ -6,7 +6,7 @@ import { CreateProductTypeDto, UpdateProductTypeDto } from '../dtos/product_type
 @ApiTags('Product type')
 @Controller('product-type')
 export class ProductTypeController {
-    /* constructor(private productType:ProductTypeService){}
+    constructor(private productType:ProductTypeService){}
 
     @Get()
     @HttpCode(HttpStatus.ACCEPTED)
@@ -39,5 +39,5 @@ export class ProductTypeController {
     @HttpCode(HttpStatus.OK)
     delete( @Param('productTypeId', ParseIntPipe) productTypeId: number ){
         return this.productType.delete(productTypeId);
-    } */
+    }
 }

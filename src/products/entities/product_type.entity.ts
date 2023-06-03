@@ -6,7 +6,7 @@ export class Product_type {
     @PrimaryGeneratedColumn()
     product_type_id: number;
 
-    @Column({ type:'varchar', length: 80 })
+    @Column({ type:'varchar', length: 70 })
     product_type: string;
 
     @CreateDateColumn({

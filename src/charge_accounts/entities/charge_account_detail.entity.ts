@@ -14,7 +14,7 @@ export class Charge_account_detail {
     quantity: number;
 
     @Column({ type:'double' })
-    value: number;
+    unit_value: number;
 
     @CreateDateColumn({
         type: 'timestamp',

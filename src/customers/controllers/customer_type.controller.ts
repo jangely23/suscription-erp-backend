@@ -6,7 +6,7 @@ import { CreateCustomerTypeDto, UpdateCustomerTypeDto } from '../dtos/customer_t
 @ApiTags('Customer type')
 @Controller('customers-type')
 export class CustomerTypeController {
-    /* constructor(private customerType: CustomerTypeService) {}
+    constructor(private customerType: CustomerTypeService) {}
 
     @Get()
     @HttpCode(HttpStatus.ACCEPTED)
@@ -41,6 +41,6 @@ export class CustomerTypeController {
     @Delete(':customerTypeId')
     delete(@Param('customerTypeId', ParseIntPipe) customer_type_id: number){
         return this.customerType.delete(customer_type_id);
-    } */
+    }
     
 }

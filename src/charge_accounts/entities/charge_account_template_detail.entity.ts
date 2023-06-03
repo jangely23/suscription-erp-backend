@@ -6,9 +6,6 @@ import { Product } from "src/products/entities/product.entity";
 export class Charge_account_template_detail {
     @PrimaryGeneratedColumn()
     charge_account_template_detail_id: number;
-    
-    @Column({ type:'int' })
-    product_id: number;
 
     @Column({ type:'text'})
     observation: string;
@@ -17,7 +14,7 @@ export class Charge_account_template_detail {
     quantity: number;
 
     @Column({ type:'double' })
-    value: number;
+    unit_value: number;
 
     @CreateDateColumn({
         type: 'timestamp',

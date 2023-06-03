@@ -7,7 +7,7 @@ export class Customer_order {
     @PrimaryGeneratedColumn()
     customer_order_id: number;
 
-    @Column({ type:'enum', enum:[ 'pending','process','success','cancelled' ] })
+    @Column({ type:'enum', enum:[ 'pending','process','success','cancelled','none' ] })
     state: string;
 
     @Column({ type:'double' })

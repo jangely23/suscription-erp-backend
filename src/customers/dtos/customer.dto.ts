@@ -1,16 +1,18 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
 
 export class CreateCustomerDto{
+    /* @IsPositive()
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly customer_type_id: number;
+    readonly customerTypeCustomerTypeId: number;
 
+    @IsPositive()
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly parent_id: number;
+    readonly parentCustomerCustomerId: number; */
 
     @IsString()
     @IsNotEmpty()
