@@ -56,7 +56,6 @@ export class ProductsService {
         return productAll;
     }
 
-
     async findAllServices(company_id: number, params?: FilterProductsDto){
         let serviceAll;
         

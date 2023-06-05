@@ -26,10 +26,10 @@ export class Customer_order_detail {
     update_date: Date;
 
     // Own foreign keys
-    
-    @ManyToOne(() => Customer_order, (customer_order)=> customer_order.customer_order_details)
-    customer_order = Customer_order;
 
-    @ManyToOne(() => Product, (product) => product.customer_order_details)
-    product = Product;
+    @ManyToOne(() => Customer_order, (customer_order)=> customer_order.customer_order_details)
+    customer_order: Customer_order;
+
+    @ManyToOne(() => Product, (product)=> product.customer_order_details)
+    product: Product;
 }

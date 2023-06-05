@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Charge_account } from '../entities/charge_account.entity';
 import { Repository } from 'typeorm';
-import { CreateChargeAccountDto, UpdateChargeAccountDto } from '../dtos/charge_account.dto';
+import { CreateChargeAccountDto, FilterChargeAccountDto, UpdateChargeAccountDto } from '../dtos/charge_account.dto';
 
 @Injectable()
 export class ChargeAccountsService {
@@ -11,12 +11,31 @@ export class ChargeAccountsService {
         private charge_account: Repository<Charge_account>,
     ){}
 
-    /* findAllByCompany(company_id: number): Promise<Charge_account[]>{
-        const allChargeAccount = this.charge_account.find({
-            where:{
-                company_id,
-            }
-        })
+    async findAllByCompany(company_id: number, params: FilterChargeAccountDto): Promise<Charge_account[]>{
+               
+        let allChargeAccount;
+
+        if(params){
+            const {limit, offset} =params;
+
+            allChargeAccount = await this.charge_account.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    }
+                },
+                take: limit,
+                skip: offset
+            })
+        }else{
+            allChargeAccount = await this.charge_account.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    }
+                }
+            })
+        }
 
         if(!allChargeAccount){
             throw new NotFoundException('Charge account is empty');
@@ -25,13 +44,36 @@ export class ChargeAccountsService {
         return allChargeAccount;
     }
 
-    findAllByCustomer(company_id: number, customer_id: number): Promise<Charge_account[]>{
-        const allChargeAccount = this.charge_account.find({
-            where:{
-                company_id,
-                customer_id,
-            }
-        })
+    async findAllByCustomer(company_id: number, customer_id: number, params: FilterChargeAccountDto): Promise<Charge_account[]>{
+                       
+        let allChargeAccount;
+
+        if(params){
+            const {limit, offset} =params;
+            allChargeAccount = await this.charge_account.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    },
+                    customer:{
+                        customer_id,
+                    }
+                },
+                take: limit,
+                skip: offset
+            })
+        }else{
+            allChargeAccount = await this.charge_account.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    },
+                    customer:{
+                        customer_id,
+                    }
+                }
+            })
+        }
 
         if(!allChargeAccount){
             throw new NotFoundException('Charge account is empty');
@@ -42,6 +84,9 @@ export class ChargeAccountsService {
 
     async findOne(charge_account_id: number): Promise<Charge_account | undefined>{
         const chargeAccount = await this.charge_account.findOne({
+            relations:{
+                charge_account_details: true,
+            },
             where:{
                 charge_account_id,
             }
@@ -87,7 +132,7 @@ export class ChargeAccountsService {
             throw new NotFoundException('Charge account not found');
         }
 
-        return this.charge_account.delete(chargeAccount);
-    } */
+        return this.charge_account.delete(charge_account_id);
+    }
 
 }

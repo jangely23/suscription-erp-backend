@@ -8,7 +8,7 @@ import { UpdateChargeAccountDto } from '../dtos/charge_account.dto';
 
 @Injectable()
 export class ChargeAccountTypesService {
-    /* constructor(
+    constructor(
         @InjectRepository(Charge_account_type)
         private charge_acount_type: Repository<Charge_account_type>,
     ){}
@@ -66,5 +66,5 @@ export class ChargeAccountTypesService {
         }
 
         return this.charge_acount_type.delete(charge_account_type_id)
-    } */
+    }
 }

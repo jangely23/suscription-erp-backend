@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min } from "class-validator";
 
 export class CreateChargeAccountDto {
     @IsNumber()
@@ -29,3 +29,15 @@ export class CreateChargeAccountDto {
 }
 
 export class UpdateChargeAccountDto extends PartialType(CreateChargeAccountDto){}
+
+export class FilterChargeAccountDto {
+    @IsOptional()
+    @IsNumber()
+    @IsPositive()
+    limit: number;
+  
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    offset: number;
+}

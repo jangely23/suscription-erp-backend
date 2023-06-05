@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CustomersService } from '../services/customers.service';
-import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
+import { CreateCustomerDto, FilterCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 
 @ApiTags('Customer')
 @Controller('customers')
@@ -25,10 +25,9 @@ export class CustomersController {
   @HttpCode(HttpStatus.ACCEPTED)
   getAllCustomers(
     @Param('companyId') company_id: number,
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
+    @Query() params: FilterCustomerDto,
   ) {
-    return this.customer.findAll(company_id);
+    return this.customer.findAll(company_id, params);
   }
 
   @Get('one/:customerId')

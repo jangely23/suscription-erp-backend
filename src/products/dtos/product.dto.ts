@@ -98,10 +98,12 @@ export class UpdateProductDto extends PartialType(CreateProductDto){}
 
 export class FilterProductsDto{
     @IsOptional()
+    @IsNumber()
     @IsPositive()
     limit: number;
 
     @IsOptional()
     @Min(0)
+    @IsNumber()
     offset: number;
 }

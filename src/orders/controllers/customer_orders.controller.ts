@@ -1,12 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CustomerOrdersService } from '../services/customers_orders.service';
-import { CreateCustomerOrderDto, UpdateCustomerOrderDto } from '../dtos/customer_order.dto';
+import { CreateCustomerOrderDto, FilterCustomerOrderDto, UpdateCustomerOrderDto } from '../dtos/customer_order.dto';
 
 @ApiTags('Customer orders')
 @Controller('customer-orders')
 export class CustomerOrdersController {
-    /* constructor(private customerOrder: CustomerOrdersService ){}
+    constructor(private customerOrder: CustomerOrdersService ){}
    
     @Get('order/:customerOrderId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -19,9 +19,10 @@ export class CustomerOrdersController {
     @Get(':companyId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCompany(
-        @Param('companyId', ParseIntPipe) company_id: number
+        @Param('companyId', ParseIntPipe) company_id: number,
+        @Query() params: FilterCustomerOrderDto
     ){
-        return this.customerOrder.findAllByCompany(company_id);
+        return this.customerOrder.findAllByCompany(company_id, params);
     }
 
     @Get(':companyId/:customerId')
@@ -29,8 +30,9 @@ export class CustomerOrdersController {
     getAllByCustomer(
         @Param('companyId', ParseIntPipe) company_id: number,
         @Param('customerId', ParseIntPipe) customer_id: number,
+        @Query() params: FilterCustomerOrderDto
     ){
-        return this.customerOrder.findAllByCustomer(company_id, customer_id);
+        return this.customerOrder.findAllByCustomer(company_id, customer_id, params);
     }
 
     @Post()
@@ -52,5 +54,5 @@ export class CustomerOrdersController {
     @HttpCode(HttpStatus.OK)
     delete(@Param('customerOrderId', ParseIntPipe) customer_order_id: number){
         return this.customerOrder.delete(customer_order_id);
-    } */   
+    }   
 }

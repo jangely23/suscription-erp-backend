@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Charge_account_template } from '../entities/charge_account_template.entity';
-import { CreateChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto';
+import { CreateChargeAccountTemplateDto, FilterChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto';
 
 @Injectable()
 export class ChargeAccountsTemplateService {
@@ -11,12 +11,31 @@ export class ChargeAccountsTemplateService {
         private charge_account_template: Repository<Charge_account_template>,
     ){}
 
-    /* findAllByCompany(company_id: number): Promise<Charge_account_template[]>{
-        const allChargeAccountTemplate = this.charge_account_template.find({
-            where:{
-                company_id,
-            }
-        })
+    async findAllByCompany(company_id: number, params: FilterChargeAccountTemplateDto): Promise<Charge_account_template[]>{
+                      
+        let allChargeAccountTemplate;
+
+        if(params){
+            const {limit, offset} =params;
+
+            allChargeAccountTemplate = await this.charge_account_template.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    }
+                },
+                take: limit,
+                skip: offset
+            })
+        }else{
+            allChargeAccountTemplate = await this.charge_account_template.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    }
+                }
+            })
+        }
 
         if(!allChargeAccountTemplate){
             throw new NotFoundException('Charge account template is empty');
@@ -25,13 +44,38 @@ export class ChargeAccountsTemplateService {
         return allChargeAccountTemplate;
     }
 
-    findAllByCustomer(company_id: number, customer_id: number): Promise<Charge_account_template[]>{
-        const allChargeAccountTemplate = this.charge_account_template.find({
-            where:{
-                company_id,
-                customer_id,
-            }
-        })
+    async findAllByCustomer(company_id: number, customer_id: number, params: FilterChargeAccountTemplateDto): Promise<Charge_account_template[]>{
+                              
+        let allChargeAccountTemplate;
+
+        if(params){
+            const {limit, offset} =params;
+
+            allChargeAccountTemplate = await this.charge_account_template.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    },
+                    customer:{
+                        customer_id,
+                    }
+                },
+                take: limit,
+                skip: offset
+            })
+        }else{
+            allChargeAccountTemplate = await this.charge_account_template.find({
+                where:{
+                    company:{
+                        customer_id:company_id,
+                    },
+                    customer:{
+                        customer_id,
+                    }
+                }
+            })
+        }
+
 
         if(!allChargeAccountTemplate){
             throw new NotFoundException('Charge account template is empty');
@@ -42,6 +86,9 @@ export class ChargeAccountsTemplateService {
 
     async findOne(charge_account_template_id: number): Promise<Charge_account_template | undefined>{
         const chargeAccountTemplate = await this.charge_account_template.findOne({
+            relations:{
+                charge_account_template_details: true,
+            },
             where:{
                 charge_account_template_id,
             }
@@ -87,7 +134,7 @@ export class ChargeAccountsTemplateService {
             throw new NotFoundException('Charge account template not found');
         }
 
-        return this.charge_account_template.delete(chargeAccountTemplate);
-    } */
+        return this.charge_account_template.delete(charge_account_template_id);
+    }
 
 }

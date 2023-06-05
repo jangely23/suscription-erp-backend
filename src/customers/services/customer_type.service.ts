@@ -16,8 +16,8 @@ export class CustomerTypeService {
     private customerTypeRepo: Repository<Customer_type>,
   ) {}
 
-  findAll(): Promise<Customer_type[]> {
-    const customsType = this.customerTypeRepo.find();
+  async findAll(): Promise<Customer_type[]> {
+    const customsType = await this.customerTypeRepo.find();
     if (!customsType) {
       throw new NotFoundException(`Custom type empty`);
     }

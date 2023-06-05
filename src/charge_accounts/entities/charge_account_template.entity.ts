@@ -8,9 +8,6 @@ export class Charge_account_template {
     @PrimaryGeneratedColumn()
     charge_account_template_id: number;
 
-    @Column({ type:'int' })
-    charge_account_type_id: number;
-
     @Column({ type:'enum', enum:[ 'inactive','active','eliminate', 'none' ] })
     state: string;
 

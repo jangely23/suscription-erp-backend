@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from '../entities/customer.entity';
 import { Repository } from 'typeorm';
-import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
+import { CreateCustomerDto, FilterCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 
 @Injectable()
 export class CustomersService {
@@ -11,17 +11,34 @@ export class CustomersService {
         private customer: Repository<Customer>,     
     ){}
 
-    findAll(company_id: number){
-        const customer = this.customer.find({
-            relations:{
-                parent_customer:true,
-            },
-            where: {
-                parent_customer:{
-                    customer_id:company_id,
-                }
-            } 
-        });
+    async findAll(company_id: number, params?: FilterCustomerDto){
+        
+        let customer;
+
+        if(params){
+            const {limit, offset} = params;
+
+            customer = await this.customer.find({
+                where: {
+                    parent_customer:{
+                        customer_id:company_id,
+                    }
+                },
+                take: limit,
+                skip: offset 
+            }); 
+        }else{
+            customer = await this.customer.find({
+                relations:{
+                    parent_customer:true,
+                },
+                where: {
+                    parent_customer:{
+                        customer_id:company_id,
+                    }
+                } 
+            });   
+        }
 
         if(!customer){
             throw new NotFoundException(`Customer empty`);
