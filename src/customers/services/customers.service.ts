@@ -71,25 +71,25 @@ export class CustomersService {
     }
 
     async update(customer_id: number, change: UpdateCustomerDto) {
-        const currenCustomer = await this.customer.findOne({
+        const currentCustomer = await this.customer.findOne({
             where: { customer_id }
         })
 
-        if(!currenCustomer){
+        if(!currentCustomer){
             throw new NotFoundException('Custom not found');
         }
 
-        this.customer.merge(currenCustomer, change);
+        this.customer.merge(currentCustomer, change);
 
-        return this.customer.save(currenCustomer);
+        return this.customer.save(currentCustomer);
     }
 
     async delete(customer_id: number){
-        const currenCustomer = await this.customer.findOne({
+        const currentCustomer = await this.customer.findOne({
             where: { customer_id }
         })
 
-        if(!currenCustomer){
+        if(!currentCustomer){
             throw new NotFoundException('Custom not found');
         }
 

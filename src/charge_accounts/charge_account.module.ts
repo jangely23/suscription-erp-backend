@@ -17,6 +17,10 @@ import { Charge_account_template } from './entities/charge_account_template.enti
 import { Charge_account_template_detail } from './entities/charge_account_template_detail.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Product } from 'src/products/entities/product.entity';
+import { CustomerModule } from 'src/customers/customers.module';
+import { ProductsModule } from 'src/products/products.module';
+import { ProductsController } from 'src/products/controller/products.controller';
+import { ProductsService } from 'src/products/services/products.service';
 
 @Module({
   imports: [
@@ -29,6 +33,8 @@ import { Product } from 'src/products/entities/product.entity';
       Customer,
       Product
     ]),
+    CustomerModule,
+    ProductsModule,
   ],
   controllers: [
     ChargeAccountController,
@@ -36,6 +42,7 @@ import { Product } from 'src/products/entities/product.entity';
     ChargeAccountDetailsController,
     ChargeAccountsTemplateController,
     ChargeAccountTemplateDetailsController,
+    ProductsController,
   ],
   providers: [
     ChargeAccountDetailsService,
@@ -43,6 +50,7 @@ import { Product } from 'src/products/entities/product.entity';
     ChargeAccountsService,
     ChargeAccountsTemplateService,
     ChargeAccountTemplateDetailsService,
+    ProductsService,
   ],
 })
 export class ChargeAccountModule {}

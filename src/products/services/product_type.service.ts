@@ -11,8 +11,8 @@ export class ProductTypeService {
         private product_type: Repository<Product_type>,
     ){}
 
-    findAll(): Promise<Product_type[]>{
-        const productType = this.product_type.find();
+    async findAll(): Promise<Product_type[]>{
+        const productType = await this.product_type.find();
 
         if(!productType){
             throw new NotFoundException('Product type empty')
@@ -46,7 +46,7 @@ export class ProductTypeService {
         })
 
         if(!currentProductType){
-            throw new NotFoundException('Product not found');
+            throw new NotFoundException('Product not found.');
         }
 
         this.product_type.merge(currentProductType, changes);

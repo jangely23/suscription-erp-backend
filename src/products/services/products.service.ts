@@ -4,16 +4,18 @@ import { Repository } from 'typeorm';
 import { Product } from '../entities/product.entity';
 
 import { CreateProductDto, FilterProductsDto, UpdateProductDto } from '../dtos/product.dto';
-import { ProductTypeService } from './product_type.service';
+
 import { CustomersService } from 'src/customers/services/customers.service';
+import { ProductTypeService } from './product_type.service';
 
 @Injectable()
 export class ProductsService {
     constructor(
         @InjectRepository(Product) 
         private product: Repository<Product>,
-        private productTypeService: ProductTypeService,
         private customerService: CustomersService,
+        private productTypeService: ProductTypeService,
+
     ){}
 
     async findAllProducts(company_id: number, params?: FilterProductsDto): Promise<Product[]>{
@@ -123,14 +125,14 @@ export class ProductsService {
 
         const newProduct = this.product.create(data);
 
-        if(data.productTypeProductTypeId){
-            const productType= await this.productTypeService.findOne(data.productTypeProductTypeId)
+        if(data.product_type_id){
+            const productType= await this.productTypeService.findOne(data.product_type_id)
 
             newProduct.product_type = productType;
         }
 
-        if(data.companyCustomerId){
-            const company= await this.customerService.findOne(data.companyCustomerId);
+        if(data.company_id){
+            const company= await this.customerService.findOne(data.company_id);
             newProduct.company = company;
         }
 
@@ -148,13 +150,13 @@ export class ProductsService {
             throw new NotFoundException('Product not found');
         }
 
-        if(changes.productTypeProductTypeId){
-            const productType= await this.productTypeService.findOne(changes.productTypeProductTypeId);
+        if(changes.product_type_id){
+            const productType= await this.productTypeService.findOne(changes.product_type_id);
             currentProduct.product_type = productType;
         }
 
-        if(changes.companyCustomerId){
-            const company= await this.customerService.findOne(changes.companyCustomerId);
+        if(changes.company_id){
+            const company= await this.customerService.findOne(changes.company_id);
             currentProduct.company = company;
         }
         

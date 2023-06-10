@@ -6,7 +6,7 @@ export class CreateChargeAccountTemplateDetailsDto {
     @ApiProperty()
     @IsNotEmpty()
     @IsNumber()
-    readonly chargeAccountTemplateChargeAccountTemplateId: number;
+    readonly charge_account_template_id: number;
   
     @ApiProperty()
     @IsNotEmpty()

@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-/* import { ChargeAccountsService } from '../service/charge_accounts.service';
-import { CreateChargeAccountDto, UpdateChargeAccountDto } from '../dtos/charge_account.dto'; */
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { ChargeAccountsService } from '../service/charge_accounts.service';
+import { CreateChargeAccountDto, FilterChargeAccountDto, UpdateChargeAccountDto } from '../dtos/charge_account.dto';
 
 @Controller('charge-accounts')
 export class ChargeAccountController {
-    /* constructor(private chargeAccount: ChargeAccountsService ){}
+    constructor(private chargeAccount: ChargeAccountsService ){}
    
     @Get('charge-account/:chargeAccountId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -17,9 +17,10 @@ export class ChargeAccountController {
     @Get(':companyId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCompany(
-        @Param('companyId', ParseIntPipe) company_id: number
+        @Param('companyId', ParseIntPipe) company_id: number,
+        @Query() params: FilterChargeAccountDto
     ){
-        return this.chargeAccount.findAllByCompany(company_id);
+        return this.chargeAccount.findAllByCompany(company_id, params);
     }
 
     @Get(':companyId/:customerId')
@@ -27,8 +28,9 @@ export class ChargeAccountController {
     getAllByCustomer(
         @Param('companyId', ParseIntPipe) company_id: number,
         @Param('customerId', ParseIntPipe) customer_id: number,
+        @Query() params: FilterChargeAccountDto
     ){
-        return this.chargeAccount.findAllByCustomer(company_id, customer_id);
+        return this.chargeAccount.findAllByCustomer(company_id, customer_id, params);
     }
 
     @Post()
@@ -50,6 +52,6 @@ export class ChargeAccountController {
     @HttpCode(HttpStatus.OK)
     delete(@Param('chargeAccountId', ParseIntPipe) charge_account_id: number){
         return this.chargeAccount.delete(charge_account_id);
-    } */   
+    }   
 }
 

@@ -1,17 +1,18 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-/* import { ChargeAccountTemplateDetailsService } from '../service/charge_account_template_detail.service';
-import { CreateChargeAccountTemplateDetailsDto, UpdateChargeAccountTemplateDetailDto } from '../dtos/charge_account_template_details.dto';
- */
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { ChargeAccountTemplateDetailsService } from '../service/charge_account_template_detail.service';
+import { CreateChargeAccountTemplateDetailsDto, FilterChargeAccountTemplateDetailDto, UpdateChargeAccountTemplateDetailDto } from '../dtos/charge_account_template_details.dto';
+
 @Controller('charge-account-template-details')
 export class ChargeAccountTemplateDetailsController {
-        /*constructor(private chargeAccountTemplateDetails: ChargeAccountTemplateDetailsService){}
+        constructor(private chargeAccountTemplateDetails: ChargeAccountTemplateDetailsService){}
 
     @Get(':chargeAccountTemplateId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByOrder(
-        @Param('chargeAccountTemplateId', ParseIntPipe) charge_account_template_id: number
+        @Param('chargeAccountTemplateId', ParseIntPipe) charge_account_template_id: number,
+        @Query() params: FilterChargeAccountTemplateDetailDto
     ){
-        return this.chargeAccountTemplateDetails.findAll(charge_account_template_id)
+        return this.chargeAccountTemplateDetails.findAll(charge_account_template_id, params)
     }
 
     @Get('charge-account-template-details/:chargeAccountTemplateDetailId')
@@ -45,5 +46,5 @@ export class ChargeAccountTemplateDetailsController {
         @Param('chargeAccountTemplateDetailId', ParseIntPipe) charge_account_template_detail_id: number
     ){
         return this.chargeAccountTemplateDetails.delete(charge_account_template_detail_id);
-    } */
+    }
 }

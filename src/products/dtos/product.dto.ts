@@ -8,13 +8,13 @@ export class CreateProductDto{
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly productTypeProductTypeId: number;      
+    readonly product_type_id: number;      
     
     @IsPositive()
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly companyCustomerId: number;           
+    readonly company_id: number;           
     
     @IsString()
     @IsNotEmpty()
@@ -54,7 +54,7 @@ export class CreateProductDto{
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    readonly state: string;               
+    readonly status: string;               
     
     @IsNumber()
     @IsNotEmpty()

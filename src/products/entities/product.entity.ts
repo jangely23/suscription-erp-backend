@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany ,} from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, JoinColumn ,} from 'typeorm';
 import { Product_type } from './product_type.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Customer_order_detail } from 'src/orders/entities/customer_order_detail.entity';
@@ -7,7 +7,7 @@ import { Charge_account_template_detail } from 'src/charge_accounts/entities/cha
 import { Stock_inventory } from 'src/inventorys/entities/stock_inventory.entity';
 
 
-@Entity('Product')
+@Entity('products')
 export class Product {
     @PrimaryGeneratedColumn()
     product_id: number;
@@ -34,7 +34,7 @@ export class Product {
     lote: string;
 
     @Column({ type:'enum', enum:['inactive','available','sold_out','eliminate'], default:'available' })
-    state: string;
+    status: string;
 
     @Column({ type:'int' })
     quantity: number;
@@ -55,24 +55,28 @@ export class Product {
     image: string;
 
     @CreateDateColumn({
+        name: 'creation_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     creation_date: Date;
 
     @UpdateDateColumn({
+        name: 'update_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    update_date: Date;
+    update_date: Date;   
 
 
     // Own foreign keys
     
     @ManyToOne(() => Product_type, (product_type)=> product_type.products)
+    @JoinColumn({name: 'product_type_id'})
     product_type: Product_type;
     
     @ManyToOne(() => Customer, (customer)=> customer.products)
+    @JoinColumn({name: 'company_id'})
     company: Customer;
 
     // Bidirectional relationship foreign keys from another table

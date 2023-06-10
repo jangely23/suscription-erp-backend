@@ -20,7 +20,7 @@ export class CreateChargeAccountDto {
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    readonly state: string;
+    readonly status: string;
   
     @IsNumber()
     @IsNotEmpty()

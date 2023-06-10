@@ -6,12 +6,12 @@ export class CreateChargeAccountDetailsDto {
     @ApiProperty()
     @IsNotEmpty()
     @IsNumber()
-    readonly chargeAccountChargeAccountId: number;
+    readonly charge_account_id: number;
   
     @ApiProperty()
     @IsNotEmpty()
     @IsNumber()
-    readonly productProductId: number;
+    readonly product_id: number;
   
     @ApiProperty()
     @IsString()

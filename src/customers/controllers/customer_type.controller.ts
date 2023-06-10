@@ -10,10 +10,7 @@ export class CustomerTypeController {
 
     @Get()
     @HttpCode(HttpStatus.ACCEPTED)
-    getAllCustomersType(
-        @Query('limit') limit = 100,
-        @Query('offset') offset = 0,
-    ){
+    getAllCustomersType(){
         return this.customerType.findAll();
     }
 

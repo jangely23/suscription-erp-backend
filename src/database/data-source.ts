@@ -1,8 +1,6 @@
-/* Connection client migrations */
-
-import { join } from "path";
 import { DataSource } from "typeorm";
 
+/* Connection client migrations */
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -10,14 +8,13 @@ export const AppDataSource = new DataSource({
     port: 3306,
     username: 'dev-migrations',
     password: 'LaVieEstBelle',
-    database: 'erpdb',
-    synchronize: false,
+    database: 'erp_manager',
     logging: false,
-    entities: [join(__dirname,'../**/entities/*.entity{.ts,.js}')],
-    migrations: ['src/database/migrations/*{.ts,.js}'],
-    migrationsTableName: "migrations_database",
+    entities: ['/dist/**/entities/*.entity{.ts,.js}'],
+    migrations: ['/src/database/migrations/*.ts'],
+    migrationsTableName: "migrations",
+    
 })
-
 
 AppDataSource.initialize()
 .then(() => {

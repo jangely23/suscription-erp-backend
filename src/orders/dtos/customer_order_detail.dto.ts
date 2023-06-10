@@ -5,12 +5,12 @@ export class CreateCustomerOrderDetailDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  readonly customerOrderCustomerOrderId: number;
+  readonly customer_order_id: number;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  readonly productProductId: number;
+  readonly product_id: number;
     
   @ApiProperty()
   @IsString()

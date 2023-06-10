@@ -6,22 +6,22 @@ export class CreateChargeAccountTemplateDto {
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly customerCustomerId: number;
+    readonly customer_id: number;
   
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly companyCustomerId: number;
+    readonly company_id: number;
   
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly chargeAccountTypeChargeAccountTypeId: number;
+    readonly charge_account_type_id: number;
 
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    readonly state: string;
+    readonly status: string;
   
     @IsNumber()
     @IsNotEmpty()

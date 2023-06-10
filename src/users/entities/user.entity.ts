@@ -1,7 +1,7 @@
 import { Customer } from "src/customers/entities/customer.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('User')
+@Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
     user_id: number;
@@ -19,26 +19,29 @@ export class User {
     password: string;
 
     @Column({type:'enum', enum:['active','inactive','eliminate'], default:'active'})
-    state:  string;
+    status:  string;
 
     @Column({type:'enum', enum:['superadmin','administrator','operator','support'], default:'administrator'})
     role:  string;
 
     @CreateDateColumn({
+        name: 'creation_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     creation_date: Date;
 
     @UpdateDateColumn({
+        name: 'update_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    update_date: Date;
+    update_date: Date;   
 
     // Own foreign keys
     
     @ManyToOne(() => Customer, (customer) => customer.users)
-    user_customer = Customer;
+    @JoinColumn({name: 'customer_id'})
+    userCustomer: Customer;
 
 }

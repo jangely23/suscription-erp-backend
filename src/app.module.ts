@@ -14,6 +14,8 @@ import { ChargeAccountController } from './charge_accounts/controllers/charge_ac
 import { ChargeAccountModule } from './charge_accounts/charge_account.module';
 import { UsersModule } from './users/users.module';
 import configuration from './configuration';
+import { ChargeAccountsService } from './charge_accounts/service/charge_accounts.service';
+import { CampaignModule } from './campaign/campaign.module';
 
 
 
@@ -39,8 +41,9 @@ import configuration from './configuration';
     InventoryModule,
     ChargeAccountModule,
     UsersModule,
+    CampaignModule,
   ],
-  controllers: [AppController, ChargeAccountController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

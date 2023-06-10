@@ -1,7 +1,7 @@
 import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Customer } from './customer.entity';
 
-@Entity('Customer_type')
+@Entity('customer_types')
 export class Customer_type {
     @PrimaryGeneratedColumn()
     customer_type_id: number;
@@ -11,18 +11,20 @@ export class Customer_type {
     customer_type: string;
 
     @CreateDateColumn({
+        name: 'creation_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     creation_date: Date;
 
     @UpdateDateColumn({
+        name: 'update_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    update_date: Date;
+    update_date: Date;   
 
-    // Own foreign keys
+    // Bidirectional relation foreing keys
     @OneToMany(() => Customer, (customer)=> customer.customer_type)
     customers: Customer[];
 }

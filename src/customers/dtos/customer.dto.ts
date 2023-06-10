@@ -6,13 +6,13 @@ export class CreateCustomerDto{
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly customerTypeCustomerTypeId: number;
+    readonly customer_type_id: number;
 
     @IsPositive()
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
-    readonly parentCustomerCustomerId: number;
+    readonly parent_id: number;
 
     @IsString()
     @IsNotEmpty()
@@ -42,7 +42,7 @@ export class CreateCustomerDto{
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    readonly state: string;
+    readonly status: string;
 
     @IsString()
     @ApiProperty()

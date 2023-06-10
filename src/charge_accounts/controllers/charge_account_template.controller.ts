@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-/* import { ChargeAccountsTemplateService } from '../service/charge_accounts_template.service';
-import { CreateChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto'; */
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { ChargeAccountsTemplateService } from '../service/charge_accounts_template.service';
+import { CreateChargeAccountTemplateDto, FilterChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto';
 
 @Controller('charge-accounts-template')
 export class ChargeAccountsTemplateController {
-    /* constructor(private chargeAccountTemplate: ChargeAccountsTemplateService ){}
+    constructor(private chargeAccountTemplate: ChargeAccountsTemplateService ){}
    
     @Get('charge-account-template/:chargeAccountTemplateId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -17,9 +17,10 @@ export class ChargeAccountsTemplateController {
     @Get(':companyId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCompany(
-        @Param('companyId', ParseIntPipe) company_id: number
+        @Param('companyId', ParseIntPipe) company_id: number,
+        @Query() params: FilterChargeAccountTemplateDto
     ){
-        return this.chargeAccountTemplate.findAllByCompany(company_id);
+        return this.chargeAccountTemplate.findAllByCompany(company_id, params);
     }
 
     @Get(':companyId/:customerId')
@@ -27,8 +28,9 @@ export class ChargeAccountsTemplateController {
     getAllByCustomer(
         @Param('companyId', ParseIntPipe) company_id: number,
         @Param('customerId', ParseIntPipe) customer_id: number,
+        @Query() params: FilterChargeAccountTemplateDto
     ){
-        return this.chargeAccountTemplate.findAllByCustomer(company_id, customer_id);
+        return this.chargeAccountTemplate.findAllByCustomer(company_id, customer_id, params);
     }
 
     @Post()
@@ -50,5 +52,5 @@ export class ChargeAccountsTemplateController {
     @HttpCode(HttpStatus.OK)
     delete(@Param('chargeAccountTemplateId', ParseIntPipe) charge_account_template_id: number){
         return this.chargeAccountTemplate.delete(charge_account_template_id);
-    } */  
+    }  
 }

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Charge_account_template_detail } from '../entities/charge_account_template_detail.entity';
 import { Repository } from 'typeorm';
-import { CreateChargeAccountTemplateDetailsDto, UpdateChargeAccountTemplateDetailDto } from '../dtos/charge_account_template_details.dto';
+import { CreateChargeAccountTemplateDetailsDto, FilterChargeAccountTemplateDetailDto, UpdateChargeAccountTemplateDetailDto } from '../dtos/charge_account_template_details.dto';
 
 @Injectable()
 export class ChargeAccountTemplateDetailsService {
@@ -11,12 +11,27 @@ export class ChargeAccountTemplateDetailsService {
         private charge_account_template_detail: Repository<Charge_account_template_detail>,
     ){}
 
-    /* findAll(charge_account_template_detail_id: number): Promise<Charge_account_template_detail[]>{
-        const allChargeAccountTemplateDetail = this.charge_account_template_detail.find({
-            where: {
-                charge_account_template_detail_id
-            },
-        })
+    async findAll(charge_account_template_detail_id: number, params: FilterChargeAccountTemplateDetailDto): Promise<Charge_account_template_detail[]>{
+        
+        let allChargeAccountTemplateDetail;
+
+        if(params){
+            const {limit, offset} = params;
+
+            allChargeAccountTemplateDetail = await this.charge_account_template_detail.find({
+                where: {
+                    charge_account_template_detail_id
+                },
+                take: limit,
+                skip: offset
+            })
+        }else{
+            allChargeAccountTemplateDetail = await this.charge_account_template_detail.find({
+                where: {
+                    charge_account_template_detail_id
+                },
+            })
+        }
 
         if(!allChargeAccountTemplateDetail){
             throw new NotFoundException('Charge account template detail is empty');
@@ -27,10 +42,11 @@ export class ChargeAccountTemplateDetailsService {
 
 
     async findOne(charge_account_template_detail_id: number): Promise<Charge_account_template_detail | undefined>{
+             
         const chargeAccountTemplateDetail = await this.charge_account_template_detail.findOne({
             where: {
                 charge_account_template_detail_id
-            },
+                },
         })
 
         if(!chargeAccountTemplateDetail){
@@ -75,6 +91,6 @@ export class ChargeAccountTemplateDetailsService {
             throw new NotFoundException('Charge account template detail not found');
         }
         
-        return this.charge_account_template_detail.delete(chargeAccountTemplateDetail);
-    } */
+        return this.charge_account_template_detail.delete(charge_account_template_detail_id);
+    } 
 }

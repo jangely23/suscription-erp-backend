@@ -1,8 +1,10 @@
 import { Module, Global } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 
 import configuration from '../configuration';
+
 
 @Global()
 @Module({
@@ -18,8 +20,9 @@ import configuration from '../configuration';
                     username: user,
                     password,
                     database: name,
+                    entities: [join(__dirname,'/src/**/entities/*.entity{.ts,.js}')],
                     synchronize: false,
-                    autoLoadEntities:true,
+                    autoLoadEntities: true,
                 }
             }
         })

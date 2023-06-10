@@ -1,11 +1,12 @@
 import { Product } from 'src/products/entities/product.entity';
-import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Customer_type } from './customer_type.entity';
 import { Customer_order } from 'src/orders/entities/customer_order.entity';
 import { Charge_account } from 'src/charge_accounts/entities/charge_account.entity';
 import { Charge_account_template } from 'src/charge_accounts/entities/charge_account_template.entity';
 import { User } from 'src/users/entities/user.entity';
-@Entity('Customer')
+import { Stock_inventory } from 'src/inventorys/entities/stock_inventory.entity';
+@Entity('customers')
 export class Customer {
     @PrimaryGeneratedColumn()
     customer_id: number;
@@ -26,26 +27,30 @@ export class Customer {
     country: string;
 
     @Column({type:'enum', enum:['inactive','active','demo','suspended','eliminate'], default:'active'})
-    state:  string;
+    status:  string;
 
     @CreateDateColumn({
+        name: 'creation_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
     creation_date: Date;
 
     @UpdateDateColumn({
+        name: 'update_date',
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    update_date: Date;
+    update_date: Date;   
 
     // Own foreign keys
 
     @ManyToOne(() => Customer_type, (customer_type)=> customer_type.customers)
+    @JoinColumn({name: 'customer_type_id'})
     customer_type: Customer_type;
 
     @ManyToOne(() => Customer, (customer)=> customer.companys)
+    @JoinColumn({name: 'parent_id'})
     parent_customer: Customer;
 
     // Bidirectional relationship foreign keys from another table
@@ -56,7 +61,10 @@ export class Customer {
     @OneToMany(() => Product, (product)=> product.company)
     products: Product[];
 
-    @OneToMany(() => User, (user)=> user.user_customer)
+    @OneToMany(() => Stock_inventory, (stock_inventory)=> stock_inventory.company)
+    stock_inventory: Stock_inventory[];
+
+    @OneToMany(() => User, (user)=> user.userCustomer)
     users: User[];
 
     @OneToMany(()=> Customer_order, (customer_order) => customer_order.company)
