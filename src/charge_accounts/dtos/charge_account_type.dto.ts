@@ -11,7 +11,7 @@ export class CreateChargeAccountTypeDto {
 
     @IsString()
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({example:['monthly', 'bimonthly', 'quarterly', ' semi-annually', 'annually']})
     readonly frequency: string;
 }
 

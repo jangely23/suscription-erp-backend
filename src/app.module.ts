@@ -10,12 +10,11 @@ import { ProductsModule } from './products/products.module';
 import { CustomerModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
 import { InventoryModule } from './inventorys/inventorys.module';
-import { ChargeAccountController } from './charge_accounts/controllers/charge_account.controller';
 import { ChargeAccountModule } from './charge_accounts/charge_account.module';
 import { UsersModule } from './users/users.module';
 import configuration from './configuration';
-import { ChargeAccountsService } from './charge_accounts/service/charge_accounts.service';
 import { CampaignModule } from './campaign/campaign.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -42,6 +41,7 @@ import { CampaignModule } from './campaign/campaign.module';
     ChargeAccountModule,
     UsersModule,
     CampaignModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

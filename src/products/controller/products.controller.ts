@@ -8,6 +8,15 @@ import { CreateProductDto, FilterProductsDto, UpdateProductDto } from '../dtos/p
 export class ProductsController {
     constructor(private products: ProductsService){}
 
+    @Get('one/:productId')
+    @ApiOperation({ summary: 'List one service or product ' })
+    @HttpCode(HttpStatus.ACCEPTED)
+    getOne(
+        @Param('productId', ParseIntPipe) product_id: number
+    ){
+        return this.products.findOne(product_id);
+    }
+
     @Get(':companyId/products')
     @ApiOperation({ summary: 'List of products' })
     @HttpCode(HttpStatus.ACCEPTED)
@@ -26,15 +35,6 @@ export class ProductsController {
         @Query() params: FilterProductsDto,
     ){
         return this.products.findAllServices(company_id, params);
-    }
-
-    @Get(':productId')
-    @ApiOperation({ summary: 'List one service or product ' })
-    @HttpCode(HttpStatus.ACCEPTED)
-    getOne(
-        @Param('productId', ParseIntPipe) product_id: number
-    ){
-        return this.products.findOne(product_id);
     }
 
     @Post()

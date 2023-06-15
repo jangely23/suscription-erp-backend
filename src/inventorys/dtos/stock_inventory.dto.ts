@@ -4,7 +4,7 @@ import { IsNotEmpty, IsNumber, IsOptional, IsPositive, Min } from "class-validat
 export class CreateStockInventoryDto{
 
     @IsNotEmpty()
-    @ApiProperty()    
+    @ApiProperty({example:['add','deduct','none'] })    
     readonly action: string;
 
     @ApiProperty()

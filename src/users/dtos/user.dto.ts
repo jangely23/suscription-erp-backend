@@ -25,11 +25,11 @@ export class CreateUserDto{
     @IsNotEmpty()
     readonly password: string;
 
-    @ApiProperty()
+    @ApiProperty({ example:['active','inactive','eliminate']})
     @IsNotEmpty()
     readonly status:  string;
 
-    @ApiProperty()
+    @ApiProperty({example:['superadmin','administrator','operator','support']})
     @IsNotEmpty()
     readonly role:  string;
 }

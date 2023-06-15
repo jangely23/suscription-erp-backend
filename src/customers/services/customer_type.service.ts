@@ -31,7 +31,7 @@ export class CustomerTypeService {
     });
 
     if(!customerType){
-        throw new InternalServerErrorException('Custom type error')
+        throw new NotFoundException('Custom type error')
     }
 
     return customerType;

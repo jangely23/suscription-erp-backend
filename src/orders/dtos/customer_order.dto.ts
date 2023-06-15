@@ -15,7 +15,7 @@ export class CreateCustomerOrderDto {
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({example:[ 'pending','process','success','cancelled','none' ]})
   readonly status: string;
 
   @IsNumber()

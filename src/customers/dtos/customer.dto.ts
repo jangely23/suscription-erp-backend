@@ -10,7 +10,7 @@ export class CreateCustomerDto{
 
     @IsPositive()
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     @ApiProperty()
     readonly parent_id: number;
 
@@ -41,10 +41,13 @@ export class CreateCustomerDto{
 
     @IsString()
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({
+        example: ["inactive", "active", "demo", "suspended", "eliminate"]
+    })
     readonly status: string;
 
     @IsString()
+    @IsOptional()
     @ApiProperty()
     readonly update_date: string;
 }

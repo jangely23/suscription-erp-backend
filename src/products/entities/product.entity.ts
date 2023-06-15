@@ -21,23 +21,23 @@ export class Product {
     @Column({ type:'varchar', length: 30 })
     stocktacking_sku: string;
 
-    @Column({ type:'int' })
+    @Column({ type:'int', default:0})
     size: number;
 
-    @Column({ type:'varchar', length: 30 })
+    @Column({ type:'varchar', length: 30, default:'no aplica' })
     unit_of_measurement: string;
 
     @Column({ type:'text' })
     description: string;
 
-    @Column({ type:'varchar', length: 30 })
+    @Column({ type:'varchar', length: 30, default:'no aplica' })
     lote: string;
 
     @Column({ type:'enum', enum:['inactive','available','sold_out','eliminate'], default:'available' })
     status: string;
 
     @Column({ type:'int' })
-    quantity: number;
+    quantity: number;s
 
     @Column({ type:'double' })
     price: number;

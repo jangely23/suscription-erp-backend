@@ -1,5 +1,6 @@
 import { Customer } from "src/customers/entities/customer.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Exclude } from "class-transformer";
 
 @Entity('users')
 export class User {
@@ -15,7 +16,8 @@ export class User {
     @Column({ type:'varchar', length: 100, unique: true })
     email: string;
 
-    @Column({ type:'varchar', length: 16 })
+    @Exclude()
+    @Column({ type:'varchar', length: 255 })
     password: string;
 
     @Column({type:'enum', enum:['active','inactive','eliminate'], default:'active'})

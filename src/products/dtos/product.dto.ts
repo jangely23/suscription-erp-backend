@@ -53,7 +53,7 @@ export class CreateProductDto{
     
     @IsString()
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({example:['inactive','available','sold_out','eliminate']})
     readonly status: string;               
     
     @IsNumber()

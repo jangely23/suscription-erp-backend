@@ -10,24 +10,37 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CustomersService } from '../services/customers.service';
 import { CreateCustomerDto, FilterCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+
 
 @ApiTags('Customer')
 @Controller('customers')
+@UseGuards(ApikeyGuard)
 export class CustomersController {
   constructor(private customer: CustomersService) {}
 
-  @Get(':companyId')
+  @Get('resellers')
+  @ApiOperation({ summary: 'All customer type reseller' })
+  @HttpCode(HttpStatus.ACCEPTED)
+  getAll(
+    @Query() params: FilterCustomerDto,
+  ) {
+    return this.customer.findAllReseller(params);
+  }
+
+  @Get('reseller/:companyId')
   @ApiOperation({ summary: 'Customer list of the company' })
   @HttpCode(HttpStatus.ACCEPTED)
   getAllCustomers(
     @Param('companyId') company_id: number,
     @Query() params: FilterCustomerDto,
   ) {
-    return this.customer.findAll(company_id, params);
+    return this.customer.findAllByCompany(company_id, params);
   }
 
   @Get('one/:customerId')

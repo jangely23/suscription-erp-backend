@@ -4,9 +4,14 @@ import { UserService } from '../services/user.service';
 import { CreateUserDto, FilterUserDto, UpdateUserDto } from '../dtos/user.dto';
 
 @ApiTags('User Customer')
-@Controller('user')
+@Controller('users')
 export class UserController {
     constructor(private user: UserService){}
+    @Get('one/:userId')
+    @HttpCode(HttpStatus.ACCEPTED)
+    getOne( @Param('userId', ParseIntPipe) user_id: number ){
+        return this.user.findOne(user_id);
+    }
 
     @Get(':customerId')
     @HttpCode(HttpStatus.ACCEPTED)
@@ -15,12 +20,6 @@ export class UserController {
         @Query() params: FilterUserDto
     ){
         return this.user.findAllByCustomer(customer_id, params);
-    }
-
-    @Get('one/:userId')
-    @HttpCode(HttpStatus.ACCEPTED)
-    getOne( @Param('userId', ParseIntPipe) user_id: number ){
-        return this.user.findOne(user_id);
     }
 
     @Post()

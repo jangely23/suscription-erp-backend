@@ -27,6 +27,6 @@ import { User } from 'src/users/entities/user.entity';
   ],
   controllers: [CustomerTypeController, CustomersController],
   providers: [CustomersService, CustomerTypeService],
-  exports: [CustomersService]
+  exports: [CustomersService, CustomerTypeService]
 })
 export class CustomerModule {}

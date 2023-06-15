@@ -30,7 +30,7 @@ export class ProductsService {
                         customer_id:company_id,
                     },
                     product_type:{
-                        product_type_id:2
+                        product_type: "producto"
                     }
                 },
                 take: limit,
@@ -70,7 +70,7 @@ export class ProductsService {
                         customer_id:company_id,
                     },
                     product_type:{
-                        product_type_id:1
+                        product_type: 'servicio'
                     }
                 },
                 take: limit,
@@ -115,7 +115,10 @@ export class ProductsService {
     async create(data: CreateProductDto){
         const skuIfExist = await this.product.findOne({
             where:{
-                stocktacking_sku: data.stocktacking_sku
+                stocktacking_sku: data.stocktacking_sku,
+                company:{
+                    customer_id: data.company_id
+                }
             }
         });
 
@@ -126,7 +129,7 @@ export class ProductsService {
         const newProduct = this.product.create(data);
 
         if(data.product_type_id){
-            const productType= await this.productTypeService.findOne(data.product_type_id)
+            const productType= await this.productTypeService.findOne(data.product_type_id);
 
             newProduct.product_type = productType;
         }

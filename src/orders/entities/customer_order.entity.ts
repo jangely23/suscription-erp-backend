@@ -1,6 +1,7 @@
 import { PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Customer_order_detail } from './customer_order_detail.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
+import { Expose } from 'class-transformer';
 
 @Entity('customer_orders')
 export class Customer_order {
@@ -41,4 +42,5 @@ export class Customer_order {
     
     @OneToMany(() => Customer_order_detail, (customer_order_detail)=> customer_order_detail.customer_order)
     customer_order_details: Customer_order_detail[];
+
 }

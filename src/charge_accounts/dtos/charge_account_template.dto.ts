@@ -20,7 +20,7 @@ export class CreateChargeAccountTemplateDto {
 
     @IsString()
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({example:['inactive','active','eliminate', 'none']})
     readonly status: string;
   
     @IsNumber()

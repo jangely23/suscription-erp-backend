@@ -19,7 +19,7 @@ export class CreateChargeAccountDto {
 
     @IsString()
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({example: ['pending','payment','suspended','eliminate','none']})
     readonly status: string;
   
     @IsNumber()
