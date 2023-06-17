@@ -23,7 +23,7 @@ export class User {
     @Column({type:'enum', enum:['active','inactive','eliminate'], default:'active'})
     status:  string;
 
-    @Column({type:'enum', enum:['superadmin','administrator','operator','support'], default:'administrator'})
+    @Column({type:'enum', enum:['superadmin','administrator','operator','customer'], default:'administrator'})
     role:  string;
 
     @CreateDateColumn({

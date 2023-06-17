@@ -29,7 +29,7 @@ export class CreateUserDto{
     @IsNotEmpty()
     readonly status:  string;
 
-    @ApiProperty({example:['superadmin','administrator','operator','support']})
+    @ApiProperty({example:['superadmin','administrator','operator','customer']})
     @IsNotEmpty()
     readonly role:  string;
 }

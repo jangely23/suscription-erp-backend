@@ -62,11 +62,13 @@ export class UserService {
     }
 
     async findByEmailOrUser(username: string){
+        
         const oneUser = await this.user.findOne({
             where:[
-                {username} ,
-                {email:username}
+                { status: 'active', username } ,
+                { status: 'active', email:username }
             ],
+            
         })
 
         if(!oneUser){
