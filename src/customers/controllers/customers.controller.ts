@@ -12,15 +12,17 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CustomersService } from '../services/customers.service';
 import { CreateCustomerDto, FilterCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RoleGuard } from 'src/auth/guards/role.guard';
 
-
+@ApiBearerAuth()
 @ApiTags('Customer')
 @Controller('customers')
-@UseGuards(ApikeyGuard)
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 export class CustomersController {
   constructor(private customer: CustomersService) {}
 

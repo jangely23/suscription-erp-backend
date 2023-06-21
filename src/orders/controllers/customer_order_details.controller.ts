@@ -1,9 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CustomerOrderDetailsService } from '../services/customer_order_details.service';
 import { CreateCustomerOrderDetailDto, FilterCustomerOrderDetailDto, UpdateCustomerOrderDetailDto } from '../dtos/customer_order_detail.dto';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RoleGuard } from 'src/auth/guards/role.guard';
 
+@ApiBearerAuth()
 @ApiTags('Customer order details')
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 @Controller('customer-order-details')
 export class CustomerOrderDetailsController {
     constructor(private customerOrderDetail: CustomerOrderDetailsService){}

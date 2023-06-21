@@ -1,9 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../services/user.service';
 import { CreateUserDto, FilterUserDto, UpdateUserDto } from '../dtos/user.dto';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RoleGuard } from 'src/auth/guards/role.guard';
 
+@ApiBearerAuth()
 @ApiTags('User Customer')
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 @Controller('users')
 export class UserController {
     constructor(private user: UserService){}

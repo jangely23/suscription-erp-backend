@@ -1,8 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { InventorysService } from '../services/inventorys.service';
 import { CreateStockInventoryDto, FilterStockInventoryDto, UpdateStockInventoryDto } from '../dtos/stock_inventory.dto';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RoleGuard } from 'src/auth/guards/role.guard';
 
+@ApiBearerAuth()
+@ApiTags('Inventory management')
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 @ApiTags('inventory management')
 @Controller('inventorys')
 export class InventorysController {

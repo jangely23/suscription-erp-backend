@@ -23,8 +23,9 @@ async function bootstrap() {
 
   // Swagger
   const config = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('ERP Manager')
+    .addBearerAuth()
+    .setTitle('ERP Manager ')
+    .setDescription('API documentation')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

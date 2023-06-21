@@ -1,10 +1,15 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { ProductTypeService } from '../services/product_type.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateProductTypeDto, UpdateProductTypeDto } from '../dtos/product_type.dto';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RoleGuard } from 'src/auth/guards/role.guard';
 
+@ApiBearerAuth()
 @ApiTags('Product type')
 @Controller('product-type')
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 export class ProductTypeController {
     constructor(private productType:ProductTypeService){}
 

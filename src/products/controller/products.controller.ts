@@ -1,15 +1,17 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ProductsService } from '../services/products.service';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateProductDto, FilterProductsDto, UpdateProductDto } from '../dtos/product.dto'; 
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Roles } from 'src/auth/decorators/role.decorator';
 import { Role } from 'src/auth/models/role.model';
 import { RoleGuard } from 'src/auth/guards/role.guard';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 
 
-@UseGuards(JwtAuthGuard, RoleGuard)
+@ApiBearerAuth()
 @ApiTags('Products')
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 @Controller('products')
 export class ProductsController {
     constructor(private products: ProductsService){}

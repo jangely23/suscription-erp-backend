@@ -1,7 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ChargeAccountsTemplateService } from '../service/charge_accounts_template.service';
 import { CreateChargeAccountTemplateDto, FilterChargeAccountTemplateDto, UpdateChargeAccountTemplateDto } from '../dtos/charge_account_template.dto';
+import { RoleGuard } from 'src/auth/guards/role.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Charge account templates')
+@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
 @Controller('charge-accounts-template')
 export class ChargeAccountsTemplateController {
     constructor(private chargeAccountTemplate: ChargeAccountsTemplateService ){}
