@@ -5,6 +5,8 @@ import { CreateProductTypeDto, UpdateProductTypeDto } from '../dtos/product_type
 import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { Role } from 'src/auth/models/role.model';
 
 @ApiBearerAuth()
 @ApiTags('Product type')
@@ -13,24 +15,28 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 export class ProductTypeController {
     constructor(private productType:ProductTypeService){}
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get()
     @HttpCode(HttpStatus.ACCEPTED)
     getAll(){
         return this.productType.findAll();
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':productTypeId')
     @HttpCode(HttpStatus.ACCEPTED)
     getOne(@Param('productTypeId', ParseIntPipe) productTypeId: number){
         return this.productType.findOne(productTypeId);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Post()
     @HttpCode(HttpStatus.CREATED)
     create(@Body() payload: CreateProductTypeDto){
         return this.productType.create(payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Put(':productTypeId')
     @HttpCode(HttpStatus.OK)
     update(
@@ -40,6 +46,7 @@ export class ProductTypeController {
         return this.productType.update(productTypeId, payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Delete(':productTypeId')
     @HttpCode(HttpStatus.OK)
     delete( @Param('productTypeId', ParseIntPipe) productTypeId: number ){

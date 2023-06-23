@@ -5,6 +5,8 @@ import { CreateStockInventoryDto, FilterStockInventoryDto, UpdateStockInventoryD
 import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { Role } from 'src/auth/models/role.model';
 
 @ApiBearerAuth()
 @ApiTags('Inventory management')
@@ -14,6 +16,7 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 export class InventorysController {
     constructor(private stockInventory: InventorysService) {}
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':companyId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllstocksinventory(

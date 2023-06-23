@@ -57,6 +57,9 @@ export class CustomersService {
             const {limit, offset} = params;
 
             customer = await this.customer.find({
+                relations:{
+                    customer_type: true,
+                },
                 where: {
                     parent_customer:{
                         customer_id:company_id,
@@ -68,7 +71,8 @@ export class CustomersService {
         }else{
             customer = await this.customer.find({
                 relations:{
-                    parent_customer:true,
+                    parent_customer: true,
+                    customer_type: true
                 },
                 where: {
                     parent_customer:{
@@ -88,7 +92,7 @@ export class CustomersService {
     async findOne(customer_id: number): Promise<Customer | undefined>{
         const customer = await this.customer.findOne({
             relations:{
-                products:true
+                products:true,
             },
             where:{
                 customer_id

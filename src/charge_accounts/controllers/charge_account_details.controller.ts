@@ -5,6 +5,8 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { Role } from 'src/auth/models/role.model';
 
 @ApiBearerAuth()
 @ApiTags('Charge account details')
@@ -13,6 +15,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class ChargeAccountDetailsController {
     constructor(private chargeAccountDetail: ChargeAccountDetailsService){}
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':chargeAccountId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByOrder(
@@ -22,6 +25,7 @@ export class ChargeAccountDetailsController {
         return this.chargeAccountDetail.findAll(charge_account_id, params)
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get('charge-account-detail/:chargeAccountDetailId')
     @HttpCode(HttpStatus.ACCEPTED)
     getOne(
@@ -30,6 +34,7 @@ export class ChargeAccountDetailsController {
         return this.chargeAccountDetail.findOne(charge_account_detail_id)
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Post()
     @HttpCode(HttpStatus.CREATED)
     create(
@@ -38,6 +43,7 @@ export class ChargeAccountDetailsController {
         return this.chargeAccountDetail.create(payload)
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Put(':chargeAccountDetailId')
     @HttpCode(HttpStatus.OK)
     update(
@@ -47,6 +53,7 @@ export class ChargeAccountDetailsController {
         return this.chargeAccountDetail.update(charge_account_detail_id, payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Delete(':chargeAccountDetailId')
     @HttpCode(HttpStatus.OK)
     delete(

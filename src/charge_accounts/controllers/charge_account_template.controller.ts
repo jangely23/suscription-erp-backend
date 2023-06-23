@@ -5,6 +5,8 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { Role } from 'src/auth/models/role.model';
 
 @ApiBearerAuth()
 @ApiTags('Charge account templates')
@@ -13,6 +15,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class ChargeAccountsTemplateController {
     constructor(private chargeAccountTemplate: ChargeAccountsTemplateService ){}
    
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get('charge-account-template/:chargeAccountTemplateId')
     @HttpCode(HttpStatus.ACCEPTED)
     getOne(
@@ -21,6 +24,7 @@ export class ChargeAccountsTemplateController {
         return this.chargeAccountTemplate.findOne(charge_account_template_id);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':companyId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCompany(
@@ -30,6 +34,7 @@ export class ChargeAccountsTemplateController {
         return this.chargeAccountTemplate.findAllByCompany(company_id, params);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':companyId/:customerId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCustomer(
@@ -40,12 +45,14 @@ export class ChargeAccountsTemplateController {
         return this.chargeAccountTemplate.findAllByCustomer(company_id, customer_id, params);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Post()
     @HttpCode(HttpStatus.CREATED)
     create(@Body() payload: CreateChargeAccountTemplateDto){
         return this.chargeAccountTemplate.create(payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Put(':chargeAccountTemplateId')
     @HttpCode(HttpStatus.OK)
     update(
@@ -55,6 +62,7 @@ export class ChargeAccountsTemplateController {
         return this.chargeAccountTemplate.update(charge_account_template_id, payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Delete(':chargeAccountTemplateId')
     @HttpCode(HttpStatus.OK)
     delete(@Param('chargeAccountTemplateId', ParseIntPipe) charge_account_template_id: number){

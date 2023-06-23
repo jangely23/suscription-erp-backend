@@ -5,6 +5,8 @@ import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { Role } from 'src/auth/models/role.model';
 
 @ApiBearerAuth()
 @ApiTags('Charge account types')
@@ -13,7 +15,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class ChargeAccountTypeController {
      constructor(private chargeAccountType: ChargeAccountTypesService) {}
 
-   @Get()
+    @Roles(Role.ADMIN, Role.OPERATOR)
+    @Get()
     @HttpCode(HttpStatus.ACCEPTED)
     getAllCustomersType(
         @Query('limit') limit = 100,
@@ -22,18 +25,22 @@ export class ChargeAccountTypeController {
         return this.chargeAccountType.findAll();
     }
 
+    
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':chargeAccountTypeId')
     @HttpCode(HttpStatus.ACCEPTED)
     getOneCustomerType(@Param('chargeAccountTypeId', ParseIntPipe)customer_type_id: number ){
         return this.chargeAccountType.findOne(customer_type_id);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Post()
     @HttpCode(HttpStatus.CREATED)
     create(@Body() payload: CreateChargeAccountTypeDto){
         return this.chargeAccountType.create(payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Put(':chargeAccountTypeId')
     @HttpCode(HttpStatus.OK)
     update(
@@ -43,6 +50,7 @@ export class ChargeAccountTypeController {
         return this.chargeAccountType.update(customer_type_id, payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Delete(':chargeAccountTypeId')
     @HttpCode(HttpStatus.OK)
     delete(@Param('chargeAccountTypeId', ParseIntPipe) customer_type_id: number){

@@ -64,6 +64,11 @@ export class UserService {
     async findByEmailOrUser(username: string){
         
         const oneUser = await this.user.findOne({
+            relations: { 
+                userCustomer: {
+                    customer_type: true,
+                } 
+            },
             where:[
                 { status: 'active', username } ,
                 { status: 'active', email:username }
@@ -111,6 +116,10 @@ export class UserService {
         }
 
         this.user.merge(currentUser, changes);
+
+        // parameters from hash: password, number of hops
+        const hashPassword = await bcrypt.hash(currentUser.password, 10);
+        currentUser.password = hashPassword;
 
         return this.user.save(currentUser);
     }

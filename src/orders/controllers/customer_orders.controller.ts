@@ -5,6 +5,8 @@ import { CreateCustomerOrderDto, FilterCustomerOrderDto, UpdateCustomerOrderDto 
 import { ApikeyGuard } from 'src/auth/guards/apikey.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { Role } from 'src/auth/models/role.model';
 
 
 @ApiBearerAuth()
@@ -14,6 +16,7 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 export class CustomerOrdersController {
     constructor(private customerOrder: CustomerOrdersService ){}
    
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get('order/:customerOrderId')
     @HttpCode(HttpStatus.ACCEPTED)
     getOne(
@@ -22,6 +25,7 @@ export class CustomerOrdersController {
         return this.customerOrder.findOne(customer_order_id);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':companyId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCompany(
@@ -31,6 +35,7 @@ export class CustomerOrdersController {
         return this.customerOrder.findAllByCompany(company_id, params);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Get(':companyId/:customerId')
     @HttpCode(HttpStatus.ACCEPTED)
     getAllByCustomer(
@@ -41,12 +46,14 @@ export class CustomerOrdersController {
         return this.customerOrder.findAllByCustomer(company_id, customer_id, params);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Post()
     @HttpCode(HttpStatus.CREATED)
     create(@Body() payload: CreateCustomerOrderDto){
         return this.customerOrder.create(payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Put(':customerOrderId')
     @HttpCode(HttpStatus.OK)
     update(
@@ -56,6 +63,7 @@ export class CustomerOrdersController {
         return this.customerOrder.update(customer_order_id, payload);
     }
 
+    @Roles(Role.ADMIN, Role.OPERATOR)
     @Delete(':customerOrderId')
     @HttpCode(HttpStatus.OK)
     delete(@Param('customerOrderId', ParseIntPipe) customer_order_id: number){
