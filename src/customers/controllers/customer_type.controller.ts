@@ -7,14 +7,18 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Roles } from 'src/auth/decorators/role.decorator';
 import { Role } from 'src/auth/models/role.model';
+import { UserRoleGuard } from 'src/auth/guards/user-role.guard';
+import { UserRole } from 'src/auth/models/userRole.model';
+import { UserRoles } from 'src/auth/decorators/userRole.decorator';
 
 @ApiBearerAuth()
 @ApiTags('Customer type')
-@UseGuards(ApikeyGuard, JwtAuthGuard, RoleGuard)
+@UseGuards(ApikeyGuard, JwtAuthGuard, UserRoleGuard, RoleGuard)
 @Controller('customers-type')
 export class CustomerTypeController {
     constructor(private customerType: CustomerTypeService) {}
 
+    @UserRoles(UserRole.EMPRESA, UserRole.DISTRIBUIDOR)
     @Roles(Role.ADMIN, Role.OPERATOR)
     @Get()
     @HttpCode(HttpStatus.ACCEPTED)
@@ -29,6 +33,7 @@ export class CustomerTypeController {
         return this.customerType.findOne(customer_type_id);
     }
 
+    @UserRoles(UserRole.EMPRESA, UserRole.DISTRIBUIDOR)
     @Roles(Role.ADMIN, Role.OPERATOR)
     @Post()
     @HttpCode(HttpStatus.CREATED)
